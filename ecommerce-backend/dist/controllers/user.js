@@ -41,3 +41,14 @@ export const getUser = TryCatch(async (req, res, next) => {
         user,
     });
 });
+export const deleteUser = TryCatch(async (req, res, next) => {
+    const id = req.params.id;
+    const user = await User.findById(id);
+    if (!user)
+        return next(new ErrorHandler("Invalid Id", 400));
+    await User.deleteOne();
+    return res.status(200).json({
+        success: true,
+        message: "User successfully deleted",
+    });
+});
