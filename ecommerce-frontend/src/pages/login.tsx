@@ -19,13 +19,13 @@ const Login = () => {
       const { user } = await signInWithPopup(auth, provider);
 
       const res = await login({
-        name: "Asas",
-        email: "asasas@gada.com",
-        photo: "dfwerewfr",
+        name: user.displayName!,
+        email: user.email!,
+        photo: user.photoURL!,
         gender,
         role: "user",
         dob: date,
-        _id: "21312sds",
+        _id: user.uid,
       });
 
       if ("data" in res) {
