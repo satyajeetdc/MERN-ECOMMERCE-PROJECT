@@ -169,7 +169,7 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
     console.log("Product photo deleted");
   });
 
-  await Product.deleteOne();
+  await product.deleteOne();
 
   invalidateCache({
     product: true,
