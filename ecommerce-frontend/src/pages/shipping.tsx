@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { CartReducerInitialState } from "../types/reducer-types";
@@ -24,6 +24,13 @@ const Shipping = () => {
     setShippingInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (cartItems.length <= 0) return navigate("/cart");
   }, [cartItems]);
@@ -33,7 +40,7 @@ const Shipping = () => {
       <button className="back-btn" onClick={() => navigate("./cart")}>
         <BiArrowBack />
       </button>
-      <form>
+      <form onSubmit={submitHandler}>
         <h1>Shipping Address</h1>
         <input
           required
