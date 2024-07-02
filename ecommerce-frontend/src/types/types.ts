@@ -33,3 +33,21 @@ export type CartItems = {
   quantity: number;
   stock: number;
 };
+
+export type OrderItems = Omit<CartItems, "stock"> & { _id: string };
+
+export type Order = {
+  orderItems: OrderItems[];
+  shippingInfo: ShippingInfo;
+  subtotal: number;
+  tax: number;
+  shippingCharges: number;
+  discount: number;
+  total: number;
+  status: string;
+  user: {
+    name: string;
+    _id: string;
+  };
+  _id: string;
+};

@@ -105,6 +105,15 @@ $color3: rgb(0, 104, 136);
   }
 }
 
+.not-found {
+  @include flex(column);
+  height: 80vh;
+
+  > svg {
+    font-size: 5rem;
+  }
+}
+
 .admin-container {
   @include grid(1fr 4fr, 2rem);
   height: 100vh;
