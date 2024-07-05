@@ -1,5 +1,10 @@
+import { useSelector } from "react-redux";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { LineChart } from "../../../components/admin/Charts";
+import { RootState } from "../../../redux/store";
+import { useLineQuery } from "../../../redux/api/dashboardAPI";
+import { CustomError } from "../../../types/api-types";
+import toast from "react-hot-toast";
 
 const months = [
   "January",
@@ -17,6 +22,14 @@ const months = [
 ];
 
 const Linecharts = () => {
+  const { user } = useSelector((state: RootState) => state.userReducer);
+
+  const { isLoading, data, error, isError } = useLineQuery(user?._id!);
+
+  if (isError) {
+    const err = error as CustomError;
+    toast.error(err.data.message);
+  }
   return (
     <div className="admin-container">
       <AdminSidebar />
