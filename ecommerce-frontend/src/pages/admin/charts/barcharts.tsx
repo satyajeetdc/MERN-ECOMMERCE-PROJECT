@@ -1,26 +1,14 @@
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { BarChart } from "../../../components/admin/Charts";
-import { RootState } from "../../../redux/store";
-import toast from "react-hot-toast";
-import { CustomError } from "../../../types/api-types";
-import { useBarQuery } from "../../../redux/api/dashboardAPI";
 import { SkeletonLoader } from "../../../components/loader";
+import { useBarQuery } from "../../../redux/api/dashboardAPI";
+import { RootState } from "../../../redux/store";
+import { CustomError } from "../../../types/api-types";
+import { getLastMonths } from "../../../utils/features";
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const { last6Months, last12Months } = getLastMonths();
 
 const Barcharts = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -48,6 +36,7 @@ const Barcharts = () => {
               <BarChart
                 data_1={products}
                 data_2={users}
+                labels={last6Months}
                 title_1="Products"
                 title_2="Users"
                 bgColor_1={`hsl(260, 50%, 30%)`}
@@ -65,7 +54,7 @@ const Barcharts = () => {
                 title_2=""
                 bgColor_1={`hsl(180, 40%, 50%)`}
                 bgColor_2=""
-                labels={months}
+                labels={last12Months}
               />
               <h2>Orders throughout the year</h2>
             </section>
